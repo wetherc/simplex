@@ -1,0 +1,40 @@
+# Ignore everything
+*
+
+# But descend into directories
+!*/
+
+# but still exclude generated folders
+*.egg-info/
+*.ipynb_checkpoints/
+
+# And permit certain filetypes
+!*.R
+!*.Rmd
+!*.md
+!*.css
+!*.txt
+!*.js
+!*.sql
+!*.json
+!*.sh
+!*.book
+!*.diviner
+!*.html
+!*.sas
+!*.py
+!*.sqlproj
+!*.dbmdl
+!*.sln
+!*.xml
+!*.bat
+!*.dtsx
+!*.dll
+!*.database
+!*.dtproj
+
+# And dotfiles
+!.gitignore
+!.arclint
+!.arcunit
+!.arcconfig
