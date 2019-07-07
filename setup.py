@@ -8,7 +8,7 @@ setup(
     description='Visual ML model debugger',
     author='Christopher Wetherill',
     author_email='simplex@tbmh.org',
-    license='MIT',
+    license='apache',
     install_requires=[
         'flask',
         'pandas',
