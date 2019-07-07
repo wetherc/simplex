@@ -1,0 +1,14 @@
+Simplex
+Copyright 2019 WY Consulting, LLC.
+	
+This software is primarily developed and maintained by WY Consulting, LLC.
+
+Portions of this software were developed by various contributors, who retain
+copyright on their work. These works are licensed to WY Consulting, LLC.
+
+Simplex is available under the Apache 2.0 license. See LICENSE for more
+information.
+
+This software uses other open source libraries, which are located in
+"externals/". These libraries have their own licenses and copyright holders.
+

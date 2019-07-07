@@ -38,3 +38,7 @@
 !.arclint
 !.arcunit
 !.arcconfig
+
+# And some extensionless files
+!LICENSE
+!NOTICE
