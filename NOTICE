@@ -10,5 +10,6 @@ Simplex is available under the Apache 2.0 license. See LICENSE for more
 information.
 
 This software uses other open source libraries, which are located in
-"externals/". These libraries have their own licenses and copyright holders.
+"externals/" at the project root, or in an "simplex/static/externals/".
+These libraries have their own licenses and copyright holders.
 
