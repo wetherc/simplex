@@ -1,0 +1,11 @@
+.simplex-side-menu {
+  padding-top: 16px;
+  padding-right: 0;
+  background-color: #e2e2e2;
+  width: 205px;
+  max-width: 205px;
+}
+
+ul .side-menu-nav {
+  list-style: none;
+}

@@ -1,6 +1,20 @@
-    </div>  <!-- container div from header.html -->
+      </div> <!-- standard-page-body -->
+    </div>  <!-- simplex-page-frame div from header.html -->
   </body>
   <footer>
+    <link
+      rel="stylesheet"
+      type=text/css
+      href="{{ url_for('static', filename='external/fontawesome/css/fontawesome.min.css') }}">
+    <link
+      rel="stylesheet"
+      type=text/css
+      href="{{ url_for('static', filename='external/fontawesome/css/solid.min.css') }}">
+    <link
+      rel="stylesheet"
+      type=text/css
+      href="{{ url_for('static', filename='external/roboto/css/roboto.css') }}">
+
     <!--
       NOTE: To generate new SRI hashes, you can use
           openssl dgst -sha384 -binary FILENAME.js | openssl base64 -A

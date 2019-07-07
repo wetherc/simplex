@@ -1,0 +1,21 @@
+.simplex-main-menu {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  min-height: 44px;
+  background-color: #282334;
+  padding-left: 10px;
+  color: #f2f3f1;
+  padding-right: 10px;
+}
+
+.simplex-user-menu {
+  display: inline-block;
+}
+
+.simplex-user-menu .item {
+  padding: 0 5px;
+}
