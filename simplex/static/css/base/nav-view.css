@@ -6,6 +6,51 @@
   max-width: 205px;
 }
 
-ul .side-menu-nav {
+.side-menu-list-view {
+  padding-right: 8px;
+}
+
+ul.side-menu {
   list-style: none;
+  font-size: 0.9em;
+}
+
+.side-menu-item {
+  display: block;
+  white-space: nowrap;
+  text-decoration: none;
+  position: relative;
+  font-weight: 300;
+}
+
+.side-menu-item-label {
+  font-weight: 500;
+  text-transform: uppercase;
+  padding: 6px 8px 6px 12px;
+}
+
+.side-menu-item-selected {
+  text-decoration: none;
+  background-color: rgba(40, 35, 52, .05);
+}
+
+.side-menu-item-href {
+  display: block;
+  color: #282334;
+  padding: 6px 8px 6px 20px;
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.side-menu-item a.side-menu-item-href:hover {
+  text-decoration: none;
+  background-color: rgba(40, 35, 52, .10);
+}
+
+.side-menu-item-divider {
+  border-bottom: 1px solid rgba(40, 35, 52, .09);
+  margin: 0 0 8px 8px;
+  padding: 8px 0 0 0;
 }

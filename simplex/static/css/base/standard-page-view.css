@@ -11,6 +11,11 @@ p, blockquote, th, td, button {
   border: 0;
 }
 
+a {
+  text-decoration: none;
+  cursor: pointer;
+}
+
 body {
   -webkit-text-size-adjust: none;
   overflow-y: scroll;
