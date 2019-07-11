@@ -14,3 +14,19 @@ app.wsgi_app = ProxyFix(app.wsgi_app)
 @app.route('/', methods=['GET', 'POST'])
 def index():
     return render_template('index.html')
+
+@app.route('/model_performance', methods=['GET', 'POST'])
+def model_performance():
+    if request.method == 'POST':
+        
+        return redirect(url_for('index'))
+
+    return render_template('model_performance.html')
+
+@app.route('/feature_distribution', methods=['GET', 'POST'])
+def feature_distribution():
+    if request.method == 'POST':
+        
+        return redirect(url_for('index'))
+
+    return render_template('feature_distribution.html')
