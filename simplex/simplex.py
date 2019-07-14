@@ -3,6 +3,7 @@ from flask import (
     Flask, render_template, request,
     json, jsonify, make_response, Response
 )
+from simplex.src.view.page.simplex_standard_page_view import SimplexStandardPage
 
 
 app = Flask(__name__)
@@ -13,7 +14,9 @@ app.wsgi_app = ProxyFix(app.wsgi_app)
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    return render_template('index.html')
+    page = SimplexStandardPage()
+    return page.render()
+    # return render_template('index.html')
 
 
 @app.route('/manage/data', methods=['GET', 'POST'])
