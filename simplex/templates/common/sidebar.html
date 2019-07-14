@@ -5,23 +5,39 @@
         <div class="side-menu-item-label">Some header</div>
       </li>
       <li class="side-menu-item side-menu-item-selected">
-         <a  class="side-menu-item-href" href="{{ url_for('model_performance') }}">>Model Performance</a>
+        <a
+          class="side-menu-item-href"
+          href="{{ url_for('manage_data') }}">
+          Manage Data
+        </a>
       </li>
       <li class="side-menu-item">
-        <a  class="side-menu-item-href" href="{{ url_for('feature_distribution') }}">>Feature Distribution</a>
+        <a
+          class="side-menu-item-href"
+          href="{{ url_for('manage_models') }}">
+          Manage Models
+        </a>
       </li>
 
       <li class="side-menu-item-divider"></li>
 
       <li class="side-menu-item">
-          <div class="side-menu-item-label">Second header</div>
-        </li>
-        <li class="side-menu-item">
-          <a class="side-menu-item-href" href="#">Lorem Ipsum</a>
-        </li>
-        <li class="side-menu-item">
-          <a class="side-menu-item-href" href="#">Sit Dolor</a>
-        </li>
+        <div class="side-menu-item-label">Some header</div>
+      </li>
+      <li class="side-menu-item side-menu-item-selected">
+        <a
+          class="side-menu-item-href"
+          href="{{ url_for('model_performance') }}">
+          Model Performance
+        </a>
+      </li>
+      <li class="side-menu-item">
+        <a
+          class="side-menu-item-href"
+          href="{{ url_for('feature_distribution') }}">
+          Feature Distribution
+        </a>
+      </li>
 
     </ul>
   </div>

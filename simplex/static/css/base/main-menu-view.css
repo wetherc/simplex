@@ -12,6 +12,11 @@
   padding-right: 10px;
 }
 
+.simplex-main-menu-title a {
+  text-decoration: none;
+  color: #f2f3f1;
+}
+
 .simplex-user-menu {
   display: inline-block;
 }
