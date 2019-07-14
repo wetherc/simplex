@@ -23,6 +23,7 @@ def model_performance():
 
     return render_template('model_performance.html')
 
+
 @app.route('/feature_distribution', methods=['GET', 'POST'])
 def feature_distribution():
     if request.method == 'POST':
