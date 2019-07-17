@@ -1,3 +1,6 @@
+from flask import url_for
+
+
 class SimplexHeader():
     def __init__(self):
         self.classes = []
@@ -8,7 +11,7 @@ class SimplexHeader():
         <div class="simplex-main-menu">
           <div class="icon">
             <h2 class="simplex-main-menu-title">
-              <a href="{{ url_for('index') }}">Simplex</a>
+              <a href="{}">Simplex</a>
             </h2>
           </div>
           <div class="simplex-user-menu">
@@ -16,5 +19,5 @@ class SimplexHeader():
               <i class="item fas fa-envelope"></i>
           </div>
         </div>
-        """
+        """.format(url_for('index'))
         return header

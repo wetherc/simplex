@@ -1,5 +1,5 @@
-from simplex.src.view.simplex_view import SimplexView
-from simplex.src.view.layout import (
+from simplex.view.simplex_view import SimplexView
+from simplex.view.layout import (
     simplex_header_view, simplex_sidebar_view,
     simplex_body_view)
 
@@ -11,12 +11,22 @@ class SimplexStandardPage(SimplexView):
         self.sidebar = simplex_sidebar_view.SimplexSidebarView()
         self.body = simplex_body_view.SimplexBody()
 
+    def render_content_container(self):
+        container = """
+        <div class="simplex-standard-page-body">
+        {}
+        {}
+        </div>
+        """.format(
+            self.sidebar.render(),
+            self.body.render())
+
+        return container
+
     def render(self):
         standard_page = (
-            self.render_head() +
             self.header.render() +
-            self.sidebar.render() +
-            self.body.render() +
-            self.render_foot())
+            self.render_content_container()
+        )
 
         return standard_page
