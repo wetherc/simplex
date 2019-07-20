@@ -1,9 +1,11 @@
 from werkzeug.contrib.fixers import ProxyFix
 from flask import (
-    Flask, render_template, request,
+    Flask, render_template, request, url_for,
     json, jsonify, make_response, Response
 )
 from simplex.view.page.simplex_standard_page_view import SimplexStandardPage
+from simplex.view.layout.simplex_sidebar_view import SimplexSidebarItem
+from simplex.view.simui.simui_list_item_view import SIMUIListItemView
 
 
 app = Flask(__name__)
@@ -14,7 +16,25 @@ app.wsgi_app = ProxyFix(app.wsgi_app)
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
+    _sidebar_items = [
+        SimplexSidebarItem().add_content(
+            SIMUIListItemView()
+            .set_name('Some Header')
+            .set_type('label')
+            .set_selected(False)
+            .get_tag_content()
+        ),
+        SimplexSidebarItem().add_content(
+            SIMUIListItemView()
+            .set_name('Manage Data')
+            .set_type('href')
+            .set_href(url_for('manage_data'))
+            .set_selected(True)
+            .get_tag_content()
+        )]
+
     page = SimplexStandardPage()
+    page.sidebar.items = _sidebar_items
     return render_template('index.html', content=page.render())
 
 

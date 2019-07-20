@@ -1,14 +1,16 @@
 class SimplexSidebarItem():
-    def __init__(self, classes, content):
-        self.classes = []
+    def __init__(self):
+        self.classes = ['side-menu-item']
         self.label = None
         self.content = None
 
     def add_class(self, _class):
         self.classes.append(_class)
+        return self
 
     def add_content(self, content):
         self.content = content
+        return self
 
     def render(self):
         sidebar_item = """
@@ -24,12 +26,7 @@ class SimplexSidebarView():
     def __init__(self):
         self.menu_id = None
         self.classes = []
-        self.items = [
-            SimplexSidebarItem(
-                classes=['side-menu-item', 'side-menu-item-selected'],
-                content='Test'
-            )
-        ]
+        self.items = []
 
     def set_menu_id(self, menu_id):
         self.menu_id = menu_id

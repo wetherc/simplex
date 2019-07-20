@@ -1,3 +1,4 @@
+from flask import Markup
 from simplex.view.simplex_view import SimplexView
 from simplex.view.layout import (
     simplex_header_view, simplex_sidebar_view,
@@ -29,4 +30,4 @@ class SimplexStandardPage(SimplexView):
             self.render_content_container()
         )
 
-        return standard_page
+        return Markup(standard_page)
