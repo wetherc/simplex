@@ -33,23 +33,23 @@ class SimplexStorageManagementAPI:
 
     def set_host(self, host):
         self.host = host
-        return self.host
+        return self
 
     def set_port(self, port):
         self.port = port
-        return self.port
+        return self
 
     def set_user(self, user):
         self.user = user
-        return self.user
+        return self
 
     def set_password(self, password):
         self.password = urlquote(password)
-        return self.password
+        return self
 
     def set_namespace(self, namespace):
         self.namespace = namespace
-        return self.namespace
+        return self
 
     def set_conn(self):
         self.conns.append(
@@ -64,10 +64,10 @@ class SimplexStorageManagementAPI:
 
     def set_disable_utf8_mb4(self, disable_utf8_mb4):
         self.disableUTF8MB4 = disable_utf8_mb4
-        return self.disableUTF8MB4
+        return self
 
     def close_conns(self):
-        for conn in self.get_conn():
+        for conn in self.conns:
             conn.close()
 
     # [TODO: @chris]
@@ -83,10 +83,10 @@ class SimplexStorageManagementAPI:
         queries = sql.rstrip().split(';')
         queries = [query for query in filter(None, queries)]
 
-        if len(self.get_conn()) == 0:
+        if len(self.conns) == 0:
             self.set_conn()
 
-        conn = self.get_conn()[0]
+        conn = self.conns[0]
         conn = conn.connect()
 
         for query in queries:
@@ -95,7 +95,7 @@ class SimplexStorageManagementAPI:
                 self.namespace,
                 query)
 
-            for charset, value in self.get_charsets().items():
+            for charset, value in self.CHARSETS.items():
                 query = re.sub(
                     '{{\${0}}}'.format(charset),
                     value,
