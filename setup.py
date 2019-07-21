@@ -12,7 +12,8 @@ setup(
     install_requires=[
         'flask',
         'pandas',
-        'numpy'],
+        'numpy',
+        'sqlalchemy'],
     test_suite='nose.collector',
     tests_require=['nose'],
     zip_safe=False)
