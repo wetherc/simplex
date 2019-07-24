@@ -1,11 +1,13 @@
 from werkzeug.contrib.fixers import ProxyFix
 from flask import (
     Flask, render_template, request, url_for,
-    json, jsonify, make_response, Response
+    json, jsonify, make_response, Response, Markup
 )
 from simplex.view.page.simplex_standard_page_view import SimplexStandardPage
 from simplex.view.layout.simplex_sidebar_view import SimplexSidebarItem
 from simplex.view.simui.simui_list_item_view import SIMUIListItemView
+from simplex.application.storage.data_management import DataSummary
+import pandas as pd
 
 
 app = Flask(__name__)
@@ -41,7 +43,17 @@ def index():
 @app.route('/manage/data', methods=['GET', 'POST'])
 def manage_data():
     if request.method == 'POST':
-        return redirect(url_for('index'))
+        if 'data' not in request.files:
+            flash('No file part')
+        else:
+            file = pd.read_csv(request.files.get('data'))
+            file = DataSummary(file)
+            preview_data = file.preview()
+            summary_data = file.summarize()
+            return render_template(
+                'manage/data.html',
+                data=Markup(preview_data.to_html()),
+                summary=Markup(summary_data.to_html()))
 
     return render_template('manage/data.html')
 

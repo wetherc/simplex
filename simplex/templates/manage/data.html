@@ -4,19 +4,25 @@
 {% include 'common/sidebar.html' %}
 
  <div class="simplex-standard-page-content">
-    
+
       <p>Manage data</p><br><br>
-          <form method="POST" action="uploadFile" enctype="multipart/form-data">
+          <form method="POST" action="#" enctype="multipart/form-data">
 
               <strong>Upload csv Data:</strong>
               <input type="file" name="data" /><br><br>
 
               <input type="submit" value="Preview target/features"><br><br>
 
-              <input type="submit" value="This is what I want!"><br><br>
+                {% block content %}
+
+                {{data | safe}}<br><br>
+
+                {{summary | safe}}<br><br>
+
+                {% endblock %}
 
           </form>
-    
+
   </div>
 
 {% include 'common/footer.html' %}
