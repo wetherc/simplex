@@ -1,0 +1,1 @@
+from simplex.view.page.simplex_standard_page_view import SimplexStandardPage

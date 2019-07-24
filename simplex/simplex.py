@@ -3,12 +3,13 @@ from flask import (
     Flask, render_template, request, url_for,
     json, jsonify, make_response, Response, Markup
 )
-from simplex.view.page.simplex_standard_page_view import SimplexStandardPage
-from simplex.view.layout.simplex_sidebar_view import SimplexSidebarItem
-from simplex.view.simui.simui_list_item_view import SIMUIListItemView
-from simplex.application.storage.data_management import DataSummary
 import pandas as pd
 
+from simplex import (
+    SimplexManagement, SimplexStorage, SimplexEnv,
+    SimplexPage, SIMUI, SimplexLayout,
+    SimplexData
+)
 
 app = Flask(__name__)
 app.config.from_object(__name__)
@@ -19,15 +20,15 @@ app.wsgi_app = ProxyFix(app.wsgi_app)
 @app.route('/', methods=['GET', 'POST'])
 def index():
     _sidebar_items = [
-        SimplexSidebarItem().add_content(
-            SIMUIListItemView()
+        SimplexLayout.SimplexSidebarItem().add_content(
+            SIMUI.SIMUIListItemView()
             .set_name('Some Header')
             .set_type('label')
             .set_selected(False)
             .get_tag_content()
         ),
-        SimplexSidebarItem().add_content(
-            SIMUIListItemView()
+        SimplexLayout.SimplexSidebarItem().add_content(
+            SIMUI.SIMUIListItemView()
             .set_name('Manage Data')
             .set_type('href')
             .set_href(url_for('manage_data'))
@@ -35,7 +36,7 @@ def index():
             .get_tag_content()
         )]
 
-    page = SimplexStandardPage()
+    page = SimplexPage.SimplexStandardPage()
     page.sidebar.items = _sidebar_items
     return render_template('index.html', content=page.render())
 
@@ -47,7 +48,7 @@ def manage_data():
             flash('No file part')
         else:
             file = pd.read_csv(request.files.get('data'))
-            file = DataSummary(file)
+            file = SimplexData.DataSummary(file)
             preview_data = file.preview()
             summary_data = file.summarize()
             return render_template(
