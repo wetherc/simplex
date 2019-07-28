@@ -10,4 +10,4 @@ from simplex.view import simui as SIMUI
 from simplex.application import data as SimplexData
 
 
-ENV = Env.SimplexEnv()
+SIMPLEX_ENV = Env.SimplexEnv()

@@ -3,3 +3,4 @@ pandas
 numpy
 nose
 sqlalchemy
+pymysql
