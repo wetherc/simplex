@@ -6,7 +6,7 @@ from flask import (
 import pandas as pd
 
 from simplex import (
-    SimplexManagement, SimplexStorage, SimplexEnv,
+    SimplexManagement, SimplexStorage, Env,
     SimplexPage, SIMUI, SimplexLayout,
     SimplexData
 )
