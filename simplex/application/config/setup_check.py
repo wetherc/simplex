@@ -1,4 +1,3 @@
-from simplex import SIMPLEX_ENV
 from simplex import SimplexStorage
 
 
