@@ -91,8 +91,8 @@ class SimplexDatabaseSetupCheck(SimplexSetupCheck):
 
     def check_database_reachable(self):
         try:
-            self.db_connection.connect()
-            self.db_connection.close()
+            conn = self.db_connection.connection.connect()
+            conn.close()
         except Exception as e:
             self.issues.append({
                 'issue:': 'Could not establish database connection',

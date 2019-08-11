@@ -14,7 +14,7 @@ class SimplexStorageManagementAPI:
         self.port = 3306
         self.password = None
         self.namespace = 'simplex'
-        self.conns = []
+        self.connection = None
         self.disableUTF8MB4 = False
 
         self.CHARSETS = {
@@ -52,23 +52,19 @@ class SimplexStorageManagementAPI:
         return self
 
     def set_conn(self):
-        self.conns.append(
-            create_engine('mysql://{}:{}@{}:{}'.format(
+        self.connection = create_engine(
+            'mysql://{}:{}@{}:{}'.format(
                 self.user,
                 self.password,
                 self.host,
                 self.port
-            ))
+            )
         )
-        return self.conns
+        return self
 
     def set_disable_utf8_mb4(self, disable_utf8_mb4):
         self.disableUTF8MB4 = disable_utf8_mb4
         return self
-
-    def close_conns(self):
-        for conn in self.conns:
-            conn.close()
 
     # [TODO: @chris]
     #   - Improve logging for patches
@@ -83,11 +79,10 @@ class SimplexStorageManagementAPI:
         queries = sql.rstrip().split(';')
         queries = [query for query in filter(None, queries)]
 
-        if len(self.conns) == 0:
+        if not self.connection:
             self.set_conn()
 
-        conn = self.conns[0]
-        conn = conn.connect()
+        conn = self.connection.connect()
 
         for query in queries:
             query = re.sub(
