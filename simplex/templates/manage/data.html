@@ -9,15 +9,16 @@
           <form method="POST" action="#" enctype="multipart/form-data">
 
               <strong>Upload csv Data:</strong>
-              <input type="file" name="data" /><br><br>
+              <input type="file" name="data"/><br><br>
 
               <input type="submit" value="Preview target/features"><br><br>
 
                 {% block content %}
 
-                {{data | safe}}<br><br>
+                {{data}}<br><br>
 
-                {{summary | safe}}<br><br>
+                {{summary}}<br><br>
+
 
                 {% endblock %}
 
@@ -25,4 +26,4 @@
 
   </div>
 
-{% include 'common/footer.html' %}
+{% include 'common/footer.html' %}s

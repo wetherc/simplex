@@ -1,14 +1,19 @@
 import pandas as pd
+from simplex.view.simui.simui_select_item_view import SIMUISelectItemView
+from simplex.view.simui.simui_table_view import SIMUITableView
+# [TODO]: @brooke
+# Use __init__ to abstract imports from underlying file hierarchy
 
 
 class DataSummary():
     def __init__(self, data):
-        self.data = pd.DataFrame(data)
+        self.data = data
 
     def preview(self):
-        data = self.data
+        data = self.data.head()
+        data = SIMUITableView(data, data.columns).render()
 
-        return data.head()
+        return data
 
     def summarize(self):
         summary = pd.DataFrame(self.data.dtypes)
@@ -20,6 +25,27 @@ class DataSummary():
             pd.DataFrame(self.data.columns),
             pd.DataFrame(col_type)],
             axis=1)
+
         summarized_table.columns = ['Feature', 'Data Type']
 
-        return summarized_table
+        options = [(
+            SIMUISelectItemView()
+            .set_select_options([
+                'object',
+                'float64',
+                'int64',
+                'datetime64',
+                'bool',
+                ])
+            .set_selected_option(row['Data Type'])
+            .set_id(row['Feature'])
+            .render()) for index, row in summarized_table.iterrows()]
+
+        summarized_table['Inputs'] = options
+        summarized_table = summarized_table.loc[
+            :, ['Feature', 'Inputs']].copy()
+        table = SIMUITableView(
+            summarized_table,
+            summarized_table.columns).render()
+
+        return table

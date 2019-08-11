@@ -4,11 +4,12 @@ from flask import (
     json, jsonify, make_response, Response, Markup
 )
 import pandas as pd
-
+from simplex.application.data.data_management import DataSummary
+# [TODO]: @brooke
+# Use __init__ to abstract imports from underlying file hierarchy
 from simplex import (
     SimplexManagement, SimplexStorage, Env,
-    SimplexPage, SIMUI, SimplexLayout,
-    SimplexData
+    SimplexPage, SIMUI, SimplexLayout
 )
 
 app = Flask(__name__)
@@ -48,13 +49,13 @@ def manage_data():
             flash('No file part')
         else:
             file = pd.read_csv(request.files.get('data'))
-            file = SimplexData.DataSummary(file)
+            file = DataSummary(file)
             preview_data = file.preview()
             summary_data = file.summarize()
             return render_template(
                 'manage/data.html',
-                data=Markup(preview_data.to_html()),
-                summary=Markup(summary_data.to_html()))
+                data=Markup(preview_data),
+                summary=Markup(summary_data))
 
     return render_template('manage/data.html')
 
