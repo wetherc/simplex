@@ -56,8 +56,27 @@ class SimplexConfigDefaultSource(SimplexConfigSource):
             )
         return
 
-    def set_keys(self, keys: dict):
-        self.config = {**self.config, **keys}
+    def set_keys(self, update_keys: dict, config=None, path=[]):
+        if config is None:
+            config = self.config
+
+        for _key in update_keys:
+            if _key in config:
+                if (
+                    isinstance(config[_key], dict) and
+                    isinstance(update_keys[_key], dict)
+                ):
+                    self.set_keys(
+                        path=path + [str(_key)],
+                        config=config[_key],
+                        update_keys=update_keys[_key])
+                elif config[_key] == update_keys[_key]:
+                    pass  # same leaf value
+                else:
+                    config[_key] = update_keys[_key]
+            else:
+                config[_key] = update_keys[_key]
+        self.config = config
         return
 
     def get_key(self, key: str):
@@ -104,3 +123,7 @@ class SimplexConfigDatabaseSource(SimplexConfigSource):
             self.namespace = None
             self.user = None
             self.password = None
+        self.config = self.load_config()
+
+    def load_config(self):
+        return {}
