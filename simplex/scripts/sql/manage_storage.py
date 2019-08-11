@@ -1,15 +1,12 @@
 import os
 import argparse
 from pathlib import Path
-from simplex.infrastructure.storage.management.storage_management_api import (
-    SimplexStorageManagementAPI
-)
-
-ROOT = os.path.realpath(os.path.expanduser(__file__))
+from simplex import APP_ROOT
+from simplex import SimplexStorage
 
 
 def apply_patches(api):
-    patchdir = Path(ROOT).parents[3]
+    patchdir = Path(APP_ROOT).parents[0]  # somedir/simplex/
     patchdir = patchdir / 'resources/sql/quickstart'
     for patch in patchdir.iterdir():
         api.apply_patch_sql(patch)
@@ -52,7 +49,7 @@ def main():
     args = parser.parse_args()
 
     api = (
-        SimplexStorageManagementAPI()
+        SimplexStorage.SimplexStorageManagementAPI()
         .set_host(args.hostname)
         .set_user(args.username)
         .set_password(args.password)

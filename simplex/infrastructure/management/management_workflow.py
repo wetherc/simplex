@@ -1,4 +1,10 @@
 import logging
+import sys
+
+
+logging.basicConfig(
+    stream=sys.stdout,
+    level=logging.INFO)
 
 
 class SimplexManagementWorkflow:
@@ -15,12 +21,12 @@ class SimplexManagementWorkflow:
         )
 
     def log_warn(self, message):
-        self.logger.warning('[WARN]: {}'.format(
+        self.logger.info('[WARN]: {}'.format(
             message)
         )
 
     def log_fail(self, message):
-        self.logger.error('[FAIL]: {}'.format(
+        self.logger.info('[FAIL]: {}'.format(
             message)
         )
 

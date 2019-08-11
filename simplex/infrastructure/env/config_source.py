@@ -26,9 +26,9 @@ class SimplexConfigSource:
 class SimplexConfigDefaultSource(SimplexConfigSource):
 
     def __init__(self):
+        self.workflow = SimplexManagement.SimplexManagementWorkflow()
         self.config_path = APP_ROOT / 'conf/default.json'
         self.config = self.load_config()
-        self.workflow = SimplexManagement.SimplexManagementWorkflow()
 
     def load_config(self):
         if not self.config_path.is_file():
@@ -36,12 +36,13 @@ class SimplexConfigDefaultSource(SimplexConfigSource):
 
         try:
             with open(self.config_path, 'r') as f:
-                config = json.loads(f)
+                config = json.load(f)
         except json.decoder.JSONDecodeError:
             self.workflow.log_fail(
                 f'Configuration file {self.config_path} exists, but is either '
                 'not readable, or is not valid JSON. Please check the file '
                 'permissions and that it is valid JSON.')
+            config = {}
         return config
 
     def save_config(self):
@@ -59,8 +60,21 @@ class SimplexConfigDefaultSource(SimplexConfigSource):
         self.config = {**self.config, **keys}
         return
 
+    def get_key(self, key: str):
+        _keys = key.split('.')
+        _val = self.config
+        for _key in _keys:
+            _val = _val.get(_key)
+        return(_val)
+
     def delete_keys(self, keys: list):
-        [self.config.pop(key) for key in keys]
+        # [TODO]: @chris
+        # Unbreak this. It won't currently work with nesting
+        for key in keys:
+            try:
+                self.config.pop(key)
+            except:
+                pass
         return
 
     def can_write(self):
@@ -70,10 +84,9 @@ class SimplexConfigDefaultSource(SimplexConfigSource):
 class SimplexConfigLocalSource(SimplexConfigDefaultSource):
 
     def __init__(self):
-        self.config_path = APP_ROOT / 'conf/local.json'
-        self.print(config_path)
-        self.config = self.load_config()
         self.workflow = SimplexManagement.SimplexManagementWorkflow()
+        self.config_path = APP_ROOT / 'conf/local.json'
+        self.config = self.load_config()
 
 
 class SimplexConfigDatabaseSource(SimplexConfigSource):
