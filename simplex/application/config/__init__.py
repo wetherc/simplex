@@ -1,1 +1,1 @@
-from simplex.application.config import setup_check as SetupCheck
+from . import setup_check as SetupCheck

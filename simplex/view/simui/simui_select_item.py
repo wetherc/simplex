@@ -1,4 +1,4 @@
-class SIMUISelectItemView():
+class SIMUISelectItem():
 
     def __init__(self):
         self.options = []

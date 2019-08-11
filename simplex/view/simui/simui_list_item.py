@@ -1,4 +1,4 @@
-class SIMUIListItemView():
+class SIMUIListItem():
 
     def __init__(self):
         self.name = None

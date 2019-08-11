@@ -1,2 +1,1 @@
-from simplex.infrastructure.management.management_workflow import (
-    SimplexManagementWorkflow)
+from .management_workflow import SimplexManagementWorkflow

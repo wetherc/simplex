@@ -1,4 +1,4 @@
-class SIMUITableView():
+class SIMUITable():
 
     def __init__(self, table, header):
         self.table = table

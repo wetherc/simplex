@@ -1,14 +1,14 @@
-from simplex.infrastructure.config import APP_ROOT
-from simplex.infrastructure import management as SimplexManagement
-from simplex.infrastructure import storage as SimplexStorage
-from simplex.infrastructure import env as Env
+from .infrastructure.config import APP_ROOT
+from .infrastructure import management as SimplexManagement
+from .infrastructure import storage as SimplexStorage
+from .infrastructure import env as Env
 
-from simplex.view import page as SimplexPage
-from simplex.view import layout as SimplexLayout
-from simplex.view import simui as SIMUI
+from .view import SimplexPage
+from .view import SimplexLayout
+from .view import SIMUI
 
-from simplex.application import data as SimplexData
-from simplex.application import config as SimplexConfig
+from .application import data as SimplexData
+from .application import config as SimplexConfig
 
 
 SIMPLEX_ENV = Env.SimplexEnv()

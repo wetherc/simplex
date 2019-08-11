@@ -2,7 +2,7 @@
 #
 # This class serves primarily to provide an API for
 # reading Simplex configuration
-from simplex.infrastructure.env import SimplexConfig
+from simplex.infrastructure.env import SimplexConfigSource
 
 
 class SimplexEnv:
@@ -25,23 +25,11 @@ class SimplexEnv:
         # lowest order precedence and will always be superceded by any
         # other configuration source. Generally, this order will be
         # DefaultConfigSource < LocalConfigSource < DatabaseConfigSource
-        _source_stack = []
-
-        # load the system default configuration
-        _source_stack.append(
-            SimplexConfig.SimplexConfigDefaultSource())
-
-        if _source_stack[0].config.get('local_config_source'):
-            _source_stack.append(
-                SimplexConfig.SimplexConfigLocalSource(
-                    _source_stack[0].config['local_config_source']
-                ))
-
-        if _source_stack[0].config.get('database_config_source'):
-            _source_stack.append(
-                SimplexConfig.SimplexConfigDatabaseSource(
-                    _source_stack[0].config['database_config_source']
-                ))
+        _source_stack = [
+            SimplexConfigSource.SimplexConfigDefaultSource(),
+            SimplexConfigSource.SimplexConfigLocalSource(),
+            SimplexConfigSource.SimplexConfigDatabaseSource()
+        ]
 
         config = {}
         # [TODO]: @chris

@@ -22,14 +22,14 @@ app.wsgi_app = ProxyFix(app.wsgi_app)
 def index():
     _sidebar_items = [
         SimplexLayout.SimplexSidebarItem().add_content(
-            SIMUI.SIMUIListItemView()
+            SIMUI.SIMUIListItem()
             .set_name('Some Header')
             .set_type('label')
             .set_selected(False)
             .get_tag_content()
         ),
         SimplexLayout.SimplexSidebarItem().add_content(
-            SIMUI.SIMUIListItemView()
+            SIMUI.SIMUIListItem()
             .set_name('Manage Data')
             .set_type('href')
             .set_href(url_for('manage_data'))

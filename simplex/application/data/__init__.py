@@ -1,1 +1,1 @@
-from simplex.application.data.data_management import DataSummary
+from .data_management import DataSummary

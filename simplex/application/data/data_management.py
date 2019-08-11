@@ -1,6 +1,6 @@
 import pandas as pd
-from simplex.view.simui.simui_select_item_view import SIMUISelectItemView
-from simplex.view.simui.simui_table_view import SIMUITableView
+from simplex.view.simui import SIMUISelectItem
+from simplex.view.simui import SIMUITable
 # [TODO]: @brooke
 # Use __init__ to abstract imports from underlying file hierarchy
 
