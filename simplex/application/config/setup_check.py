@@ -113,3 +113,34 @@ class SimplexAuthSetupCheck(SimplexSetupCheck):
     """
     Validate authentication configuration
     """
+    def __init__(self, SIMPLEX_ENV):
+        self.config = SIMPLEX_ENV.config
+        self.connection = self.config['DB_CONN'].connection.connect()
+        self.checks = [
+            'nux', 'provider_config']
+        self.issues = []
+
+        self.check_nux()
+        self.check_configuration_set()
+
+    def check_nux(self):
+        _query = """
+            SELECT COUNT(*) AS ValidUserCount
+            FROM {}.user
+            WHERE isSystemAgent = 0
+              AND isDisabled = 0
+              AND isAdmin = 1;
+        """.format(self.config['mysql']['namespace'])
+
+        _res = self.connection.execute(_query)
+        _res = [{
+            column: value
+            for column, value in rowproxy.items()}
+            for rowproxy in _res]
+
+        if _res[0]['ValidUserCount'] < 1:
+            return True
+        return False
+
+    def check_configuration_set(self):
+        return

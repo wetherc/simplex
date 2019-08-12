@@ -1,6 +1,7 @@
 import logging
 import re
 from sqlalchemy import create_engine
+from sqlalchemy.pool import QueuePool
 from pathlib import Path
 from urllib.parse import quote_plus as urlquote
 
@@ -58,7 +59,13 @@ class SimplexStorageManagementAPI:
                 self.password,
                 self.host,
                 self.port
-            )
+            ),
+            poolclass=QueuePool,
+            pool_use_lifo=True,
+            pool_pre_ping=True,
+            pool_recycle=3600,
+            pool_size=20,
+            max_overflow=0
         )
         return self
 

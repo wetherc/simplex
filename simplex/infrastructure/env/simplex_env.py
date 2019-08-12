@@ -26,9 +26,9 @@ class SimplexEnv:
         # other configuration source. Generally, this order will be
         # DefaultConfigSource < LocalConfigSource < DatabaseConfigSource
         _source_stack = [
-            SimplexConfig.SimplexConfigDefaultSource(),
-            SimplexConfig.SimplexConfigLocalSource(),
-            SimplexConfig.SimplexConfigDatabaseSource()
+            SimplexConfigSource.SimplexConfigDefaultSource(),
+            SimplexConfigSource.SimplexConfigLocalSource(),
+            SimplexConfigSource.SimplexConfigDatabaseSource()
         ]
 
         config = {}
