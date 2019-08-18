@@ -19,5 +19,5 @@ class SimplexHeader():
               <i class="item fas fa-envelope"></i>
           </div>
         </div>
-        """.format(url_for('index'))
+        """.format(url_for('index_view.index'))
         return header

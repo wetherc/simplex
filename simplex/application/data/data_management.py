@@ -9,12 +9,6 @@ class DataSummary():
     def __init__(self, data):
         self.data = data
 
-    def preview(self):
-        data = self.data.head()
-        data = SIMUITableView(data, data.columns).render()
-
-        return data
-
     def summarize(self):
         summary = pd.DataFrame(self.data.dtypes)
         col_type = []
@@ -26,10 +20,10 @@ class DataSummary():
             pd.DataFrame(col_type)],
             axis=1)
 
-        summarized_table.columns = ['Feature', 'Data Type']
+        summarized_table.columns = ['Feature', 'Pandas Data Type']
 
         options = [(
-            SIMUISelectItemView()
+            SIMUISelectItem()
             .set_select_options([
                 'object',
                 'float64',
@@ -37,15 +31,29 @@ class DataSummary():
                 'datetime64',
                 'bool',
                 ])
-            .set_selected_option(row['Data Type'])
+            .set_selected_option(row['Pandas Data Type'])
             .set_id(row['Feature'])
             .render()) for index, row in summarized_table.iterrows()]
 
-        summarized_table['Inputs'] = options
+        summarized_table['Data Type'] = options
         summarized_table = summarized_table.loc[
-            :, ['Feature', 'Inputs']].copy()
-        table = SIMUITableView(
+            :, ['Data Type']].copy()
+        # transpose the summary table
+        summarized_table = summarized_table.transpose()
+        # get preview table
+        preview_table = self.data.head()
+        # get consistent headers
+        summarized_table.columns = preview_table.columns
+
+        # combine two tables
+        summarized_table = pd.concat([
+            preview_table,
+            summarized_table
+        ], axis=0)
+
+        table = SIMUITable(
             summarized_table,
-            summarized_table.columns).render()
+            summarized_table.columns,
+            'simplex-data-table').render()
 
         return table

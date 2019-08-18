@@ -5,25 +5,39 @@
 
  <div class="simplex-standard-page-content">
 
-      <p>Manage data</p><br><br>
+      <h4 class="simplex-page-header">Manage data</h4>
           <form method="POST" action="#" enctype="multipart/form-data">
 
-              <strong>Upload csv Data:</strong>
-              <input type="file" name="data"/><br><br>
+              <h4 class="simplex-h4">Upload csv Data:</h4>
+              <input class="simplex-upload" type="file" name="data"/>
 
-              <input type="submit" value="Preview target/features"><br><br>
+              <input class="simplex-submit" type="submit" value="Upload">
 
                 {% block content %}
+                {{preview_header}}
 
-                {{data}}<br><br>
+                {{data}}
 
-                {{summary}}<br><br>
+                {{summary_header}}
 
+
+                {{summary}}
 
                 {% endblock %}
 
+              <form method="POST" action="#" enctype="multipart/form-data">
+              {{target_header}}
+              {{target}}
+              {{p1_header}}
+              {{pred_one}}
+              {{p2_header}}
+              {{pred_two}}
+              </form>
+
+
           </form>
+          <input class="simplex-submit" type="submit" value="Start Simplex">
 
   </div>
 
-{% include 'common/footer.html' %}s
+{% include 'common/footer.html' %}
