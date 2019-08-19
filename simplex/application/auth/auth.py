@@ -1,13 +1,12 @@
 from flask import Blueprint, render_template, url_for
-from simplex import (
-    SimplexPage, SIMUI, SimplexLayout, SimplexData
-)
+from simplex import SIMUI, SimplexLayout
+from .view import AuthRegistrationView
 
 
-register_bp = Blueprint('register', __name__)
+auth_bp = Blueprint('auth', __name__)
 
 
-@register_bp.route('/auth/register')
+@auth_bp.route('/auth/register')
 def register():
     _sidebar_items = [
         SimplexLayout.SimplexSidebarItem().add_content(
@@ -21,11 +20,11 @@ def register():
             SIMUI.SIMUIListItem()
             .set_name('Register')
             .set_type('href')
-            .set_href(url_for('register.register'))
+            .set_href(url_for('auth.register'))
             .set_selected(True)
             .get_tag_content()
         )]
 
-    page = SimplexPage.SimplexStandardPage()
+    page = AuthRegistrationView.RegistrationPageView()
     page.sidebar.items = _sidebar_items
     return render_template('index.html', content=page.render())
